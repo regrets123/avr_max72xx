@@ -1,8 +1,6 @@
 ## Uppgift
 
-1. Koppla in en LED matris till en arduino. För en rad, loopa igenom raden och tänd en LED i taget.
-2. Vad behöver vi ändra för att vi ska släcka LEDerna efter oss så att vi bara har tre LEDs tända medan vi loopar?
-3. Dagens labb: Ta bort delayen och lägg till millis och analogRead biblioteken. Lägg sen till kod för att styra denna "Snake". 
+Skifta mellan 'H' och ett 'I' för att skriva ut 'HI'.
 
 ## Wokwi
 

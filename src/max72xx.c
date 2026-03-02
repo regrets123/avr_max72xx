@@ -8,8 +8,6 @@
 
 uint8_t max7219_buffer[MAX7219_BUFFER_SIZE];
 
-
-
 void max7219_word(uint8_t addr, uint8_t data) {
 	MAX7219_CS_LO();		// Set CS to LOW ____ start of transmission
 	for (uint8_t n = MAX7219_SEG_NUM; n != 0; n--) { // Send multiple times for cascaded matrices
@@ -19,9 +17,6 @@ void max7219_word(uint8_t addr, uint8_t data) {
 	MAX7219_CS_HI();		// Set CS to HIGH \__ end of transmission
 	MAX7219_CLK_LO();		// Set CLK to LOW /
 }
-
-
-
 
 const uint8_t max7219_initseq[] PROGMEM = {
 	0x09, 0x00,	// Decode-Mode Register, 00 = No decode
@@ -42,8 +37,6 @@ void max7219_init() {
 	}
 }
 
-
-
 void max7219b_out(void) {
     uint8_t bit_mask = 0x80;
     for (uint8_t row = 8; row >= 1; row--) {
@@ -55,7 +48,7 @@ void max7219b_out(void) {
                 uint8_t col = max7219_buffer[buffer_seg + index - 9];
                 MAX7219_CLK_LO();
                 if (col & bit_mask)
-                    MAX7219_DIN_HI();
+                    MAX7219_DIN_HI();#include <stdio.h>
                 else
                     MAX7219_DIN_LO();
                 MAX7219_CLK_HI();
@@ -67,32 +60,6 @@ void max7219b_out(void) {
         bit_mask >>= 1;
     }
 }
-
-
-
-// void max7219b_out(void) {
-//     uint8_t bit_mask = 0x80;
-//     for (uint8_t row = 1; row <= 8; row++) {
-//         uint8_t buffer_seg = MAX7219_BUFFER_SIZE;
-//         MAX7219_CS_LO();
-//         while (buffer_seg != 0) {
-//             max7219_byte(row);
-//             for (uint8_t index = 8; index != 0; index--) {
-//                 uint8_t col = max7219_buffer[buffer_seg + index - 9];
-//                 MAX7219_CLK_LO();
-//                 if (col & bit_mask)
-//                     MAX7219_DIN_HI();
-//                 else
-//                     MAX7219_DIN_LO();
-//                 MAX7219_CLK_HI();
-//             }
-//             buffer_seg -= 8;
-//         }
-//         MAX7219_CS_HI();
-//         MAX7219_CLK_LO();
-//         bit_mask >>= 1;
-//     }
-// }
 
 void max7219b_set(uint8_t x, uint8_t y) {
 
@@ -108,9 +75,7 @@ uint8_t max7219b_get(uint8_t x) {
 	return max7219_buffer[x];
 }
 
-
 void max7219_byte(uint8_t data) {
-    //for(uint8_t i = 0; i <= 8; i++) {
     for(uint8_t i = 8; i >= 1; i--) {
         MAX7219_CLK_LO();       // Set CLK to LOW
         if (data & 0x80)        // Mask the MSB of the data
@@ -122,12 +87,6 @@ void max7219_byte(uint8_t data) {
     }
 }
 
-
-
-
 void max7219_row(uint8_t address, uint8_t data) {
     if (address >= 1 && address <= 8) max7219_word(address, data);
 }
-
-
-
