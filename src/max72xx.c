@@ -48,7 +48,7 @@ void max7219b_out(void) {
                 uint8_t col = max7219_buffer[buffer_seg + index - 9];
                 MAX7219_CLK_LO();
                 if (col & bit_mask)
-                    MAX7219_DIN_HI();#include <stdio.h>
+                    MAX7219_DIN_HI();
                 else
                     MAX7219_DIN_LO();
                 MAX7219_CLK_HI();
@@ -62,8 +62,6 @@ void max7219b_out(void) {
 }
 
 void max7219b_set(uint8_t x, uint8_t y) {
-
-    //x = (MAX7219_BUFFER_SIZE) - x - 9;
     if (x < MAX7219_BUFFER_SIZE) max7219_buffer[x] |= (1 << y);
 }
  
